@@ -1,13 +1,4 @@
 # Exercise
-<form action="BlackJack.htm" method="get" enctype="application/x-www-form-urlencoded" name="form" id="form">
-<input type="submit" name="button" class="button" id="button" value="發牌">
-<input class="button" type="button" value="攤牌" onclick="Scoring(Play_Score , Makers_Score)">
-</form>
-<form>
-<input class="button" type="button" value="刪除cookie重起新局" onclick=" DelCookie() ">
-<input class="button" type="button" value="查看cookie內容" onclick="alert(document.cookie)">
-
-</form>
 
 
 <head><meta charset="UTF-8" />
@@ -226,12 +217,6 @@ document.cookie ="Cookie_Makers_Round"+ "=" + null + "; expires=" + exp.toGMTStr
 
 
 </script>
-
-
-
-
-
-
 </head>
 
 
@@ -240,50 +225,4 @@ document.cookie ="Cookie_Makers_Round"+ "=" + null + "; expires=" + exp.toGMTStr
 
 
 
-<style type="text/css">
-body{
-background: #94c4fe;
-background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,#94c4fe), color-stop(100%,#d3f6fe));
-background: -webkit-linear-gradient(top,#94c4fe 31%,#d3f6fe 100%);
-background: -moz-linear-gradient(top,#94c4fe 31%, #d3f6fe 100%);
-background: -o-linear-gradient(top,#94c4fe 31%,#d3f6fe 100%);
-background: -ms-linear-gradient(top,#94c4fe 31%,#d3f6fe 100%);
-background: linear-gradient(to bottom,#94c4fe 31%,#d3f6fe 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#94c4fe', endColorstr='#d3f6fe',GradientType=0 );
-}
 
-
-.button {
-border-top: 1px solid #96d1f8;
-background: #65a9d7;
-background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
-background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-background: -o-linear-gradient(top, #3e779d, #65a9d7);
-padding: 5px 10px;
--webkit-border-radius: 8px;
--moz-border-radius: 8px;
-border-radius: 8px;
--webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
--moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-box-shadow: rgba(0,0,0,1) 0 1px 0;
-text-shadow: rgba(0,0,0,.4) 0 1px 0;
-color: white;
-font-size: 1em;
-font-family: Helvetica, Arial, Sans-Serif;
-text-decoration: none;
-vertical-align: middle;
-}
-.button:hover {
-border-top-color: #28597a;
-background: #28597a;
-color: #ccc;
-}
-.button:active {
-border-top-color: #1b435e;
-background: #1b435e;
-}
-
-
-</style>
