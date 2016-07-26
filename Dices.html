@@ -1,0 +1,294 @@
+
+<!-- saved from url=(0035)http://yuka.idv.tw/Dices/Dices.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>
+
+
+	var Dices = new Array(9);
+	var i=0;
+
+	for(i=0;i<=9;i++){
+		Dices[i]=Math.floor(Math.random()*6)+1;//最大值6＃Math.floor()最大整數（整數值也包含0）
+
+		switch (Dices[i]){
+			case 1:
+			document.write("<img src='Dices01.gif' alt='Dices' border='0' />");
+			break;
+
+			case 2:
+			document.write("<img src='Dices02.gif' alt='Dices' border='0' />");
+			break;
+
+			case 3:
+			document.write("<img src='Dices03.gif' alt='Dices' border='0' />");
+			break;
+
+			case 4:
+			document.write("<img src='Dices04.gif' alt='Dices' border='0' />");
+			break;
+
+			case 5:
+			document.write("<img src='Dices05.gif' alt='Dices' border='0' />");
+			break;
+
+			case 6:
+			document.write("<img src='Dices06.gif' alt='Dices' border='0' />");
+			break;
+
+			default:
+			document.write("<h1>#Value Error!</h1>");
+			break;
+		}
+
+
+
+
+	}
+
+	document.write("<h3>Array元素成員：Dices[0]="+Dices[0]+",Dices[1]="+Dices[1]+",Dices[2]="+Dices[2]+",Dices[3]="+Dices[3]+",Dices[4]="+Dices[4]+",Dices[5]="+Dices[5]+",Dices[6]="+Dices[6]+",Dices[7]="+Dices[7]+",Dices[8]="+Dices[8]+",Dices[9]="+Dices[9]+"</h3>");
+
+
+	var Sum = Dices.reduce(function(previousValue,currentValue){
+        return previousValue + currentValue;
+	})
+	console.log(Sum);
+	document.write("本局擲骰點數總和Sum="+Sum);
+	//document.write("數量＝"+Dices.lastIndexOf(2));
+
+
+
+	var ValueOfDice1 =Dices.filter(function(each){return each == 1;});//filter()方法，會建立一個在指定函數下，所有能通過該函數測試之元素的新陣列
+		var ValueOfDice2 =Dices.filter(function(each){return each == 2;});
+	var ValueOfDice3 =Dices.filter(function(each){return each == 3;});
+		var ValueOfDice4 =Dices.filter(function(each){return each == 4;});
+	var ValueOfDice5 =Dices.filter(function(each){return each == 5;});
+		var ValueOfDice6 =Dices.filter(function(each){return each == 6;});
+
+	document.write("<br>ValueOfDice1=="+ValueOfDice1);
+	document.write("<br>ValueOfDice2=="+ValueOfDice2);
+	document.write("<br>ValueOfDice3=="+ValueOfDice3);
+	document.write("<br>ValueOfDice4=="+ValueOfDice4);
+	document.write("<br>ValueOfDice5=="+ValueOfDice5);
+	document.write("<br>ValueOfDice6=="+ValueOfDice6);
+	var Dices_Type = new Array(5);
+		Dices_Type[0]=ValueOfDice1.length;
+		Dices_Type[1]=ValueOfDice2.length;
+		Dices_Type[2]=ValueOfDice3.length;
+		Dices_Type[3]=ValueOfDice4.length;
+		Dices_Type[4]=ValueOfDice5.length;
+		Dices_Type[5]=ValueOfDice6.length;
+  	document.write("<p>骰數1＿計量:"+Dices_Type[0]+"<br>");
+  	document.write("<p>骰數2＿計量:"+Dices_Type[1]+"<br>");
+  	document.write("<p>骰數3＿計量:"+Dices_Type[2]+"<br>");
+  	document.write("<p>骰數4＿計量:"+Dices_Type[3]+"<br>");
+  	document.write("<p>骰數5＿計量:"+Dices_Type[4]+"<br>");
+  	document.write("<p>骰數6＿計量:"+Dices_Type[5]+"<br>");
+
+  	document.write("<h2>【賽局規則—擲出點2個數2 或2個點數6勝利】<H2>");
+	if(Dices_Type[1]>=2 || Dices_Type[5]>=2 ){
+	alert("恭喜，您贏得本局勝利！！");
+	}
+
+
+	function setCookie(CookieValue,Dices_Type,Sum,nDate){
+
+
+
+		var Name = new Array(3);
+		Name[0]="Dices_Game";
+		Name[1]="Dices_Type";
+		Name[2]="Cookie_Sum";
+
+		var Get_Sum=GetCookie(Name[2]);
+		if(typeof Get_Sum != "undefined"){//嘗試撈取一Cookie值//判斷是值否存在
+			
+			//document.writeln("Cookie值存在<br/>");
+
+
+			var Get_Dices_Game=GetCookie(Name[0]);
+			Get_Dices_Game=Get_Dices_Game.split(',');
+
+			var Get_Dices_Type=GetCookie(Name[1]);
+			Get_Dices_Type=Get_Dices_Type.split(',');
+
+
+			document.write("<h3>累計擲骰點數總和="+Get_Sum+"</h3>")
+
+
+			var Total_Dices_Type = new Array(5);
+				var i=1;
+				for(i=0;i<=Get_Dices_Type.length-1;i++){
+
+					Total_Dices_Type[i]=Dices_Type[0]+parseInt(Get_Dices_Type[i]);//新骰數+舊有骰數
+
+				}
+
+
+				var Dices_Sum = Total_Dices_Type.reduce(function(previousValue,currentValue){//統計擲骰次數
+        			return previousValue + currentValue;
+				})
+			console.log(Dices_Sum);
+			document.write("累計擲骰次數="+Dices_Sum+"<br>");
+
+
+			var Probability_1=Total_Dices_Type[0]/Dices_Sum*100;
+			var Probability_2=Total_Dices_Type[1]/Dices_Sum*100;
+			var Probability_3=Total_Dices_Type[2]/Dices_Sum*100;
+			var Probability_4=Total_Dices_Type[3]/Dices_Sum*100;
+			var Probability_5=Total_Dices_Type[4]/Dices_Sum*100;
+			var Probability_6=Total_Dices_Type[5]/Dices_Sum*100;
+
+			document.write("統計擲出點數1機率="+Probability_1.toFixed(4)+"<br>");
+			document.write("統計擲出點數2機率="+Probability_2.toFixed(4)+"<br>");
+			document.write("統計擲出點數3機率="+Probability_3.toFixed(4)+"<br>");
+			document.write("統計擲出點數4機率="+Probability_4.toFixed(4)+"<br>");
+			document.write("統計擲出點數5機率="+Probability_5.toFixed(4)+"<br>");
+			document.write("統計擲出點數6機率="+Probability_6.toFixed(4)+"<br>");
+
+			CookieValue=CookieValue.join();//陣列輸出轉為字串
+			Total_Dices_Type=Total_Dices_Type.join();
+
+
+
+			document.write("CookieValue="+CookieValue+"<br>");
+			document.write("Dices_Type="+Total_Dices_Type+"<br>");
+
+
+ 			var Now=new Date();  
+			var expire=new Date();//期滿
+			var Total_Sum=Sum + parseInt(Get_Sum);//類型轉換成整數
+
+				if(nDate!=null && nDate>0) {  
+					expire.setTime(Now.getTime() + 3600000*24*nDate);  
+					document.cookie = "Dices_Game" + "=" + CookieValue + ";expires=" + expire.toUTCString();
+					document.cookie = "Dices_Type" + "=" + Total_Dices_Type + ";expires=" + expire.toUTCString();
+					document.cookie = "Cookie_Sum" + "=" + Total_Sum+ ";expires=" + expire.toUTCString()
+				}else{  
+					document.cookie = "Dices_Game" + "=" + CookieValue;
+					document.cookie = "Dices_Type" + "=" + Total_Dices_Type;
+					document.cookie = "Cookie_Sum" + "=" + Total_Sum;
+				}     
+
+	
+
+		}else{
+		//document.writeln("Cookie值不存在<br/>");
+
+
+
+			CookieValue=CookieValue.join();//陣列輸出轉為字串
+			Dices_Type=Dices_Type.join();
+
+			document.write("CookieValue="+CookieValue+"<br>");
+			document.write("Dices_Type="+Dices_Type+"<br>");
+
+
+ 			var Now=new Date();  
+			var expire=new Date();//期滿
+
+
+			if(nDate!=null && nDate>0) {  
+				expire.setTime(Now.getTime() + 3600000*24*nDate);  
+				document.cookie = "Dices_Game" + "=" + CookieValue + ";expires=" + expire.toUTCString();
+				document.cookie = "Dices_Type" + "=" + Dices_Type + ";expires=" + expire.toUTCString();
+				document.cookie = "Cookie_Sum" + "=" + Sum+ ";expires=" + expire.toUTCString()
+			}else{  
+				document.cookie = "Dices_Game" + "=" + CookieValue;
+				document.cookie = "Dices_Type" + "=" + Dices_Type;
+				document.cookie = "Cookie_Sum" + "=" + Sum;
+			}
+			//alert("Cookies have been set");
+		}
+
+	}//setCookie	ED
+
+
+setCookie(Dices,Dices_Type,Sum,1000);//寫入Cookiee
+
+
+
+
+	function GetCookie(ByName){//讀取Cookiee
+
+ 		var Get_Dices = document.cookie.split('; ');
+    		var i = 0;
+    			for(i=0; i<Get_Dices.length; i++){
+				var Get_Dices2 = Get_Dices[i].split('=');
+ 				if(Get_Dices2[0] == ByName) {return Get_Dices2[1];}
+			}
+		}
+
+
+
+
+
+
+
+</script><script src="chrome-extension://jhffgcfmcckgmioipfnmbannkpncfipo/util.js"></script><script src="chrome-extension://jhffgcfmcckgmioipfnmbannkpncfipo/pagejs.js"></script></head>
+
+	<body><img src="./Dices_files/Dices03.gif" alt="Dices" border="0"><img src="./Dices_files/Dices05.gif" alt="Dices" border="0"><img src="./Dices_files/Dices02.gif" alt="Dices" border="0"><img src="./Dices_files/Dices01.gif" alt="Dices" border="0"><img src="./Dices_files/Dices01.gif" alt="Dices" border="0"><img src="./Dices_files/Dices02.gif" alt="Dices" border="0"><img src="./Dices_files/Dices04.gif" alt="Dices" border="0"><img src="./Dices_files/Dices03.gif" alt="Dices" border="0"><img src="./Dices_files/Dices02.gif" alt="Dices" border="0"><img src="./Dices_files/Dices03.gif" alt="Dices" border="0"><h3>Array元素成員：Dices[0]=3,Dices[1]=5,Dices[2]=2,Dices[3]=1,Dices[4]=1,Dices[5]=2,Dices[6]=4,Dices[7]=3,Dices[8]=2,Dices[9]=3</h3>本局擲骰點數總和Sum=26<br>ValueOfDice1==1,1<br>ValueOfDice2==2,2,2<br>ValueOfDice3==3,3,3<br>ValueOfDice4==4<br>ValueOfDice5==5<br>ValueOfDice6==<p>骰數1＿計量:2<br></p><p>骰數2＿計量:3<br></p><p>骰數3＿計量:3<br></p><p>骰數4＿計量:1<br></p><p>骰數5＿計量:1<br></p><p>骰數6＿計量:0<br></p><h2>【賽局規則—擲出點2個數2 或2個點數6勝利】</h2><h2></h2><h3>累計擲骰點數總和=1417</h3>累計擲骰次數=406<br>統計擲出點數1機率=16.5025<br>統計擲出點數2機率=16.7488<br>統計擲出點數3機率=16.2562<br>統計擲出點數4機率=16.7488<br>統計擲出點數5機率=17.2414<br>統計擲出點數6機率=16.5025<br>CookieValue=3,5,2,1,1,2,4,3,2,3<br>Dices_Type=67,68,66,68,70,67<br>
+
+
+
+<form action="BlackJack.htm" method="get" enctype="application/x-www-form-urlencoded" name="form" id="form">
+【重置初始化陣列】<input type="submit" name="button" class="button" id="button" value="重整">
+</form>
+
+
+
+<form>
+<input class="button" type="button" value="查看cookie內容" onclick="alert(document.cookie)">
+</form>
+
+
+
+
+<style type="text/css">
+	body{
+	background: #94c4fe;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,#94c4fe), color-stop(100%,#d3f6fe));
+	background: -webkit-linear-gradient(top,  #94c4fe 31%,#d3f6fe 100%);
+	background: -moz-linear-gradient(top,  #94c4fe 31%, #d3f6fe 100%);
+	background: -o-linear-gradient(top,  #94c4fe 31%,#d3f6fe 100%);
+	background: -ms-linear-gradient(top,  #94c4fe 31%,#d3f6fe 100%);
+	background: linear-gradient(to bottom,  #94c4fe 31%,#d3f6fe 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#94c4fe', endColorstr='#d3f6fe',GradientType=0 );
+	}
+
+
+.button {
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 1em;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.button:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+.button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
+
+
+</style>
+
+ 
+</body></html>
